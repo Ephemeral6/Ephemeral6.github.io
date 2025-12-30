@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的微积分笔记</title>
+    
+    <script src="./Javascript/mathjax.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+        .math-box { background: #f9f9f9; padding: 15px; border-left: 5px solid #2980b9; margin: 20px 0; }
+        h1 { border-bottom: 2px solid #eaeaea; padding-bottom: 10px; }
+        .pdf-link { display: inline-block; background: #e74c3c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px;}
+        .pdf-link:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+
+    <h1>欢迎来到我的微积分研讨会</h1>
+    <p>这里存放了我的考研数学笔记和 LaTeX 题库。</p>
+
+    <div class="math-box">
+        <h3>1. MathJax 公式测试</h3>
+        <p>下面是一个经典的极限公式（如果显示正常，说明 mathjax.js 配置成功）：</p>
+        $$ \lim_{n\to\infty} \left(1+\frac{1}{n}\right)^n = e $$
+        
+        <p>这是一个行内公式测试：设函数 $f(x) = x^2$，则 $f'(x) = 2x$。</p>
+    </div>
+
+    <div class="math-box" style="border-left-color: #e74c3c;">
+        <h3>2. PDF 笔记预览</h3>
+        <p>点击下方按钮查看 PDF 文件（需要你上传一个 .pdf 文件到仓库）：</p>
+        <a href="./assets/my-notes.pdf" class="pdf-link" target="_blank">📄 点击查看微积分笔记 PDF</a>
+        <p><small>*请确保你放了一个叫 my-notes.pdf 的文件在 assets 文件夹里，否则点不开。</small></p>
+    </div>
+
+    <script src="./Javascript/script.js"></script>
+
+</body>
+</html>
