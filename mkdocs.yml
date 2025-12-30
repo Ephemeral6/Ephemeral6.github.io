@@ -1,5 +1,4 @@
 site_name: Ephemeral的Note
-site_url: http://127.0.0.1:8000/
 
 # 1. 主题配置 (引入了深色模式和高级导航)
 theme:
