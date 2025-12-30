@@ -13,40 +13,7 @@
  * limitations under the License.
  */
 /* === PDF.js 美化补丁：现代极简白 === */
-:root {
-  /* 工具栏颜色：改成纯白，更干净 */
-  --toolbar-bg-color: #ffffff !important;
-  --toolbar-border-color: #e0e0e0 !important;
-  
-  /* 图标颜色：深灰色，对比度更高 */
-  --toolbar-icon-color: #5f6368 !important;
-  
-  /* 按钮选中/悬停时的背景色：淡蓝色 */
-  --toolbar-icon-bg-color: #e8f0fe !important; 
-  --hover-button-bg-color:  #f1f3f4 !important;
 
-  /* 侧边栏颜色 */
-  --sidebar-bg-color: #ffffff !important;
-  
-  /* 背景底色：浅灰色，让纸张更突出 */
-  --body-bg-color: #f8f9fa !important;
-  
-  /* 进度条颜色：改成稍微好看点的蓝色 */
-  --loading-bar-bg-color: #4285f4 !important;
-}
-
-/* 稍微调整一下工具栏的高度和阴影，更有层次感 */
-.toolbar {
-  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.1), 0 1px 3px 1px rgba(60,64,67,0.05) !important;
-  border-bottom: none !important;
-  z-index: 9999;
-}
-
-/* 让侧边栏也变白 */
-#sidebarContent {
-  background-color: #ffffff !important;
-  border-right: 1px solid #e0e0e0 !important;
-}
 .messageBar{
   --closing-button-icon:url(images/messageBar_closingButton.svg);
   --message-bar-close-button-color:var(--text-primary-color);

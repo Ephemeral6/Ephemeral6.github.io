@@ -1,6 +1,6 @@
 site_name: Ephemeral的Note
 
-# 1. 主题配置 (引入了深色模式和高级导航)
+# 1. 主题配置
 theme:
   name: material
   language: zh
@@ -14,7 +14,7 @@ theme:
     - search.suggest         # 搜索建议
     - search.highlight       # 搜索高亮
 
-  # 配色方案 (自动跟随系统，并提供手动切换按钮)
+  # 配色方案
   palette: 
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -31,33 +31,31 @@ theme:
         icon: material/weather-night
         name: 切换至日间模式
 
-  # 字体配置 (推荐使用更适合中文阅读的字体)
+  # 字体配置
   font:
-    text: Noto Serif SC      # 正文宋体风格，适合阅读
+    text: Noto Serif SC      # 正文宋体风格
     code: Roboto Mono        # 代码字体
 
-# 2. 导航结构 (根据你的需求定制)
 # 2. 导航结构
 nav:
   - 首页: index.md
-  
   - 数学复习:
       - 数学总览: Math/index.md
-      - 讲义:
-          - 讲义: Math/complex/近十年微积分上册真题讲义/index.md
+      - 讲义资料:
+          - 历年真题讲义: Math/complex/近十年微积分上册真题讲义/index.md
           - 讲义答案: Math/complex/讲义答案/index.md
           - 讲义真题: Math/complex/讲义真题/index.md
-          
+
 # 3. 插件列表
 plugins:
   - search
 
-# 4. Markdown 扩展 (核心功能区)
+# 4. Markdown 扩展
 markdown_extensions:
-  # 目录增强 (支持中文锚点)
+  # 目录增强
   - toc:
       permalink: true
-      slugify: !!python/name:pymdownx.slugs.uslugify
+      # 移除了过时的 slugify 配置，默认即可支持中文
   
   # 基础排版
   - admonition              # 提示框 (!!! warning)
@@ -68,7 +66,7 @@ markdown_extensions:
   - pymdownx.mark           # 高亮文本 (==text==)
   - pymdownx.tilde          # 删除线 (~~text~~)
   
-  # 数学公式 (关键配置)
+  # 数学公式
   - pymdownx.arithmatex:
       generic: true
 
@@ -82,7 +80,7 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
 
-  # 标签页 (适合展示多种解法或不同语言代码)
+  # 标签页
   - pymdownx.tabbed:
       alternate_style: true 
   
@@ -95,11 +93,15 @@ markdown_extensions:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
 
-# 5. 外部脚本 (MathJax 支持)
+# 5. 自定义样式与脚本 (路径修正)
+# 注意：MkDocs 会自动从 docs/ 目录开始寻找
+extra_css:
+  - assets/extra.css        # 修正：对应你文件列表中的 docs/assets/extra.css
+
 extra_javascript:
-  - javascripts/mathjax.js
+  # 假设你的 js 放在 docs/assets/javascripts/ 目录下
+  # 如果没有这个本地文件，这一行可以删除，直接用下面的 CDN 即可
+  # - assets/javascripts/mathjax.js 
+  
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
-extra_css:
-  - stylesheets/extra.css
