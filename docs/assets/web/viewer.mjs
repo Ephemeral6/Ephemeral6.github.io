@@ -17185,38 +17185,42 @@ const PDFViewerApplication = {
     });
   },
   async download() {
+    // ============================================
+    // 【开始】修改部分：强制通过浏览器直接下载文件
+    // ============================================
+    try {
+      // 1. 获取 URL 和文件名 (使用你代码里原有的变量)
+      const url = this._downloadUrl;
+      const filename = this._docFilename || "document.pdf";
+
+      // 2. 创建一个隐藏的 a 标签
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename; // 这里的 download 属性会让浏览器弹出保存框
+      a.style.display = 'none';
+      
+      // 3. 放到页面上并模拟点击
+      document.body.appendChild(a);
+      a.click();
+      
+      // 4. 清理垃圾
+      document.body.removeChild(a);
+      
+      // 5. 直接结束函数，不再执行下面原来复杂的逻辑
+      return; 
+    } catch (error) {
+      console.error("强制下载出错:", error);
+    }
+    // ============================================
+    // 【结束】修改部分
+    // ============================================
+
+    // 下面原来的代码（因为上面有 return，这里实际上不会被执行了，保留着也没事）
     let data;
     try {
       data = await (this.pdfDocument ? this.pdfDocument.getData() : this.pdfLoadingTask.getData());
     } catch {}
     this.downloadManager.download(data, this._downloadUrl, this._docFilename);
-  },
-  async save() {
-    if (this._saveInProgress) {
-      return;
-    }
-    this._saveInProgress = true;
-    await this.pdfScriptingManager.dispatchWillSave();
-    try {
-      const data = await this.pdfDocument.saveDocument();
-      this.downloadManager.download(data, this._downloadUrl, this._docFilename);
-    } catch (reason) {
-      console.error(`Error when saving the document:`, reason);
-      await this.download();
-    } finally {
-      await this.pdfScriptingManager.dispatchDidSave();
-      this._saveInProgress = false;
-    }
-    const editorStats = this.pdfDocument?.annotationStorage.editorStats;
-    if (editorStats) {
-      this.externalServices.reportTelemetry({
-        type: "editing",
-        data: {
-          type: "save",
-          stats: editorStats
-        }
-      });
-    }
   },
   async downloadOrSave() {
     const {
