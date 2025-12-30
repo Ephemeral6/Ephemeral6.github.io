@@ -17186,36 +17186,36 @@ const PDFViewerApplication = {
   },
   async download() {
     // ============================================
-    // 【开始】修改部分：强制通过浏览器直接下载文件
+    // 【修改版】强制浏览器直接下载
     // ============================================
     try {
-      // 1. 获取 URL 和文件名 (使用你代码里原有的变量)
-      const url = this._downloadUrl;
+      // 1. 获取 URL (双保险写法，防止其中一个是空的)
+      const url = this._downloadUrl || this.baseUrl;
       const filename = this._docFilename || "document.pdf";
 
-      // 2. 创建一个隐藏的 a 标签
+      if (!url) {
+        console.error("无法获取文件下载链接");
+        return;
+      }
+
+      // 2. 创建隐藏链接触发下载
       const a = document.createElement('a');
       a.href = url;
-      a.download = filename; // 这里的 download 属性会让浏览器弹出保存框
+      a.download = filename; 
       a.style.display = 'none';
-      
-      // 3. 放到页面上并模拟点击
       document.body.appendChild(a);
       a.click();
-      
-      // 4. 清理垃圾
       document.body.removeChild(a);
       
-      // 5. 直接结束函数，不再执行下面原来复杂的逻辑
+      // 3. 拦截成功，结束运行
       return; 
     } catch (error) {
       console.error("强制下载出错:", error);
     }
+    
     // ============================================
-    // 【结束】修改部分
+    // 原有逻辑作为备份 (实际上不会执行到这)
     // ============================================
-
-    // 下面原来的代码（因为上面有 return，这里实际上不会被执行了，保留着也没事）
     let data;
     try {
       data = await (this.pdfDocument ? this.pdfDocument.getData() : this.pdfLoadingTask.getData());
