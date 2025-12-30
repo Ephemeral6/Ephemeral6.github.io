@@ -1,0 +1,113 @@
+site_name: Ephemeral的Note
+site_url: http://127.0.0.1:8000/
+
+# 1. 主题配置 (引入了深色模式和高级导航)
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs        # 顶部导航栏
+    - navigation.tracking    # URL 随滚动变化
+    - navigation.sections    # 侧边栏分组
+    - navigation.top         # 返回顶部按钮
+    - navigation.indexes     # 允许文件夹点击直接跳转
+    - toc.follow             # 右侧目录跟随滚动
+    - search.suggest         # 搜索建议
+    - search.highlight       # 搜索高亮
+
+  # 配色方案 (自动跟随系统，并提供手动切换按钮)
+  palette: 
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white         # 顶栏颜色
+      accent: indigo         # 链接/强调色
+      toggle:
+        icon: material/weather-sunny
+        name: 切换至深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 切换至日间模式
+
+  # 字体配置 (推荐使用更适合中文阅读的字体)
+  font:
+    text: Noto Serif SC      # 正文宋体风格，适合阅读
+    code: Roboto Mono        # 代码字体
+
+# 2. 导航结构 (根据你的需求定制)
+# 2. 导航结构
+nav:
+  - 首页: index.md
+  
+  - 数学复习:
+      - 数学总览: Math/index.md
+      - 讲义:
+          - 讲义: Math/complex/近十年微积分上册真题讲义/index.md
+          - 讲义答案: Math/complex/讲义答案/index.md
+          - 讲义真题: Math/complex/讲义真题/index.md
+          
+  - 化学研究:
+      - 高斯计算笔记: Chemistry/g16_notes.md
+      - RDKit脚本: Chemistry/rdkit_script.md
+      
+  - 编程技能:
+      - Linux基础: Coding/linux_basics.md
+
+# 3. 插件列表
+plugins:
+  - search
+
+# 4. Markdown 扩展 (核心功能区)
+markdown_extensions:
+  # 目录增强 (支持中文锚点)
+  - toc:
+      permalink: true
+      slugify: !!python/name:pymdownx.slugs.uslugify
+  
+  # 基础排版
+  - admonition              # 提示框 (!!! warning)
+  - attr_list               # 允许添加 HTML 属性
+  - footnotes               # 脚注
+  - pymdownx.details        # 折叠块 (??? info)
+  - pymdownx.caret          # 下划线/上标
+  - pymdownx.mark           # 高亮文本 (==text==)
+  - pymdownx.tilde          # 删除线 (~~text~~)
+  
+  # 数学公式 (关键配置)
+  - pymdownx.arithmatex:
+      generic: true
+
+  # 代码块与高亮
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:   # 支持 Mermaid 流程图
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  # 标签页 (适合展示多种解法或不同语言代码)
+  - pymdownx.tabbed:
+      alternate_style: true 
+  
+  # 任务列表
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  # Emoji 支持
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+# 5. 外部脚本 (MathJax 支持)
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
