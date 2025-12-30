@@ -1,6 +1,5 @@
 <iframe 
     src="/assets/web/viewer.html?file=/Math/complex/讲义真题/讲义真题.pdf" 
-    width="150%" 
-    height="800px" 
-    style="border: none;">
+    style="width: 100%; height: 90vh; border: none; display: block;" 
+    allowfullscreen>
 </iframe>
