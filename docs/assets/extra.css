@@ -20,12 +20,25 @@
 }
 */
 
-/* 3. PDF iframe 优化 */
-iframe[src*="viewer.html"] {
+/* 3. PDF iframe 响应式优化
+   策略：
+   - 桌面端 (>76.2em): 150%宽度, 90vh高度 - 利用宽屏空间
+   - 平板横屏 (60em-76.2em): 100%宽度, 75vh高度 - 平衡显示
+   - 移动端 (<76.2em): 100%宽度, 65vh高度 - 避免横向滚动
+   - 超小屏 (<480px): 100%宽度, 60vh高度 - 更多垂直空间
+*/
+iframe[src*="viewer.html"],
+.pdf-viewer {
     display: block;
     margin: 20px auto;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border-radius: 8px;
+    border: none;
+    /* 桌面端使用150%宽度，高度90vh */
+    width: 150%;
+    height: 90vh;
+    /* 平滑过渡 */
+    transition: all 0.3s ease;
 }
 
 /* ========== 移动端优化 ========== */
@@ -73,11 +86,14 @@ iframe[src*="viewer.html"] {
   }
 
   /* 移动端 PDF iframe 自适应 */
-  iframe[src*="viewer.html"] {
-    width: 100% !important;
-    height: 70vh !important;
-    margin: 10px 0;
+  iframe[src*="viewer.html"],
+  .pdf-viewer {
+    width: 100%;
+    height: 65vh;
+    margin: 10px auto;
     border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    max-width: 100%;
   }
 
   /* 优化移动端按钮点击区域 */
@@ -120,12 +136,25 @@ iframe[src*="viewer.html"] {
   .md-typeset code {
     font-size: 0.7rem;
   }
+
+  /* 超小屏幕 PDF 高度调整 */
+  iframe[src*="viewer.html"],
+  .pdf-viewer {
+    height: 60vh;
+  }
 }
 
 /* 平板横屏优化 */
 @media screen and (min-width: 60em) and (max-width: 76.1875em) {
   .md-grid {
     max-width: 95%;
+  }
+
+  /* 平板 PDF 优化 */
+  iframe[src*="viewer.html"],
+  .pdf-viewer {
+    width: 100%;
+    height: 75vh;
   }
 }
 
