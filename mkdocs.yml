@@ -55,6 +55,13 @@ nav:
           - 讲义答案: Math/线性代数/讲义答案/index.md
           - 讲义真题: Math/线性代数/讲义真题/index.md
 
+  - 人工智能:
+      - AI总览: AI/index.md
+      - 序: AI/序/index.md
+      - 第一章: AI/第一章/index.md
+      - 第二章:
+          - 第一节: AI/第二章第一节/index.md
+
 # 3. 插件列表
 plugins:
   - search
