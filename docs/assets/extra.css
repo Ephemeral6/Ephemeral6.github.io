@@ -1,10 +1,10 @@
 /* === MkDocs 超宽屏补丁 === */
 
-/* 1. 打破默认的最大宽度限制 */
-.md-grid {
-  /* 默认大约是 1220px，我们把它改成更大的值，或者直接用百分比 */
-  max-width: 96% !important; 
-  /* 如果你不想太宽，可以改成具体的像素值，比如 1600px */
+/* 1. 打破默认的最大宽度限制 (仅在桌面端) */
+@media screen and (min-width: 76.25em) {
+  .md-grid {
+    max-width: 96% !important;
+  }
 }
 
 /* 2. (可选) 调整左侧导航栏和右侧目录的宽度比例 */
@@ -12,19 +12,145 @@
 /*
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary {
-    width: 20% !important; /* 左侧导航栏宽度 */
+    width: 20% !important;
   }
   .md-sidebar--secondary {
-     width: 15% !important; /* 右侧目录栏宽度 */
+     width: 15% !important;
   }
 }
 */
 
-/* 3. (可选) 针对你的 PDF iframe 的额外优化 */
-/* 让 iframe 在宽屏下也保持居中和协调 */
+/* 3. PDF iframe 优化 */
 iframe[src*="viewer.html"] {
     display: block;
-    margin: 20px auto; /* 上下留点空隙，水平居中 */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加个阴影更有质感 */
-    border-radius: 8px; /* 圆角 */
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* ========== 移动端优化 ========== */
+
+/* 移动端内容区域优化 */
+@media screen and (max-width: 76.1875em) {
+  /* 增加移动端内容左右边距，避免文字贴边 */
+  .md-content {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
+  /* 优化移动端字体大小 */
+  .md-typeset {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* 移动端标题大小优化 */
+  .md-typeset h1 {
+    font-size: 1.6rem;
+    margin-top: 1rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+
+  .md-typeset h3 {
+    font-size: 1.2rem;
+  }
+
+  /* 移动端代码块优化 */
+  .md-typeset pre {
+    font-size: 0.75rem;
+    padding: 0.8rem;
+  }
+
+  /* 移动端表格横向滚动 */
+  .md-typeset table:not([class]) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 移动端 PDF iframe 自适应 */
+  iframe[src*="viewer.html"] {
+    width: 100% !important;
+    height: 70vh !important;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+
+  /* 优化移动端按钮点击区域 */
+  .md-typeset a,
+  .md-nav__link {
+    padding: 0.4rem 0;
+    min-height: 44px; /* iOS 最佳触摸尺寸 */
+    display: flex;
+    align-items: center;
+  }
+
+  /* 移动端搜索框优化 */
+  .md-search__input {
+    font-size: 16px; /* 防止 iOS 自动缩放 */
+  }
+}
+
+/* 超小屏幕优化 (手机竖屏) */
+@media screen and (max-width: 480px) {
+  .md-content {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  /* 进一步缩小字体 */
+  .md-typeset {
+    font-size: 0.85rem;
+  }
+
+  .md-typeset h1 {
+    font-size: 1.4rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.2rem;
+  }
+
+  /* 移动端代码块字体再小一点 */
+  .md-typeset pre,
+  .md-typeset code {
+    font-size: 0.7rem;
+  }
+}
+
+/* 平板横屏优化 */
+@media screen and (min-width: 60em) and (max-width: 76.1875em) {
+  .md-grid {
+    max-width: 95%;
+  }
+}
+
+/* 数学公式移动端优化 */
+@media screen and (max-width: 76.1875em) {
+  .md-typeset .arithmatex {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 改善触摸滚动体验 */
+.md-content,
+.md-sidebar__scrollwrap {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 移动端导航优化 - 增大可点击区域 */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__item {
+    padding: 0.2rem 0;
+  }
+
+  .md-nav__link {
+    padding: 0.6rem 0.8rem;
+  }
 }

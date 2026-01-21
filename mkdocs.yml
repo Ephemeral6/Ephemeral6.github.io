@@ -13,6 +13,9 @@ theme:
     - toc.follow             # 右侧目录跟随滚动
     - search.suggest         # 搜索建议
     - search.highlight       # 搜索高亮
+    - content.code.copy      # 代码一键复制按钮
+    - navigation.footer      # 底部导航（移动端友好）
+    - toc.integrate          # 移动端目录集成到侧边栏
 
   # 配色方案
   palette: 
