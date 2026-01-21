@@ -79,6 +79,7 @@ markdown_extensions:
   # 基础排版
   - admonition              # 提示框 (!!! warning)
   - attr_list               # 允许添加 HTML 属性
+  - md_in_html              # 在HTML中使用Markdown
   - footnotes               # 脚注
   - pymdownx.details        # 折叠块 (??? info)
   - pymdownx.caret          # 下划线/上标
