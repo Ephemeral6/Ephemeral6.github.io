@@ -63,9 +63,10 @@ nav:
       - 序: AI/序/index.md
       - 第一章: AI/第一章/index.md
       - 第二章:
-          - 第一节: AI/第二章第一节/index.md
-          - 第二节: AI/第二章第二节/index.md
-          - 第三节: AI/第二章第三节/index.md
+          - AI/第二章/index.md
+          - 第一节: AI/第二章/第一节/index.md
+          - 第二节: AI/第二章/第二节/index.md
+          - 第三节: AI/第二章/第三节/index.md
       - 第三章:
           - 第一节: AI/第三章第一节/index.md
 
