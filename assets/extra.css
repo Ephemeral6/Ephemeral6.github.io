@@ -1,0 +1,444 @@
+/* === MkDocs 超宽屏补丁 === */
+
+/* 1. 打破默认的最大宽度限制 (仅在桌面端) */
+@media screen and (min-width: 76.25em) {
+  .md-grid {
+    max-width: 96% !important;
+  }
+}
+
+/* 2. (可选) 调整左侧导航栏和右侧目录的宽度比例 */
+/* 如果觉得两边太窄，可以取消下面这几行的注释来微调 */
+/*
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary {
+    width: 20% !important;
+  }
+  .md-sidebar--secondary {
+     width: 15% !important;
+  }
+}
+*/
+
+/* 3. PDF iframe 响应式优化
+   策略：
+   - 桌面端 (>76.2em): 150%宽度, 90vh高度 - 利用宽屏空间
+   - 平板横屏 (60em-76.2em): 100%宽度, 75vh高度 - 平衡显示
+   - 移动端 (<76.2em): 100%宽度, 65vh高度 - 避免横向滚动
+   - 超小屏 (<480px): 100%宽度, 60vh高度 - 更多垂直空间
+*/
+iframe[src*="viewer.html"],
+.pdf-viewer {
+    display: block;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    border: none;
+    /* 桌面端使用150%宽度，高度90vh */
+    width: 150%;
+    height: 90vh;
+    /* 平滑过渡 */
+    transition: all 0.3s ease;
+}
+
+/* ========== 移动端优化 ========== */
+
+/* 移动端内容区域优化 */
+@media screen and (max-width: 76.1875em) {
+  /* 增加移动端内容左右边距，避免文字贴边 */
+  .md-content {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
+  /* 优化移动端字体大小 */
+  .md-typeset {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* 移动端标题大小优化 */
+  .md-typeset h1 {
+    font-size: 1.6rem;
+    margin-top: 1rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+
+  .md-typeset h3 {
+    font-size: 1.2rem;
+  }
+
+  /* 移动端代码块优化 */
+  .md-typeset pre {
+    font-size: 0.75rem;
+    padding: 0.8rem;
+  }
+
+  /* 移动端表格横向滚动 */
+  .md-typeset table:not([class]) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 移动端 PDF iframe 自适应 */
+  iframe[src*="viewer.html"],
+  .pdf-viewer {
+    width: 100%;
+    height: 65vh;
+    margin: 10px auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    max-width: 100%;
+  }
+
+  /* 优化移动端按钮点击区域 */
+  .md-typeset a,
+  .md-nav__link {
+    padding: 0.4rem 0;
+    min-height: 44px; /* iOS 最佳触摸尺寸 */
+    display: flex;
+    align-items: center;
+  }
+
+  /* 移动端搜索框优化 */
+  .md-search__input {
+    font-size: 16px; /* 防止 iOS 自动缩放 */
+  }
+}
+
+/* 超小屏幕优化 (手机竖屏) */
+@media screen and (max-width: 480px) {
+  .md-content {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  /* 进一步缩小字体 */
+  .md-typeset {
+    font-size: 0.85rem;
+  }
+
+  .md-typeset h1 {
+    font-size: 1.4rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.2rem;
+  }
+
+  /* 移动端代码块字体再小一点 */
+  .md-typeset pre,
+  .md-typeset code {
+    font-size: 0.7rem;
+  }
+
+  /* 超小屏幕 PDF 高度调整 */
+  iframe[src*="viewer.html"],
+  .pdf-viewer {
+    height: 60vh;
+  }
+}
+
+/* 平板横屏优化 */
+@media screen and (min-width: 60em) and (max-width: 76.1875em) {
+  .md-grid {
+    max-width: 95%;
+  }
+
+  /* 平板 PDF 优化 */
+  iframe[src*="viewer.html"],
+  .pdf-viewer {
+    width: 100%;
+    height: 75vh;
+  }
+}
+
+/* 数学公式移动端优化 */
+@media screen and (max-width: 76.1875em) {
+  .md-typeset .arithmatex {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 改善触摸滚动体验 */
+.md-content,
+.md-sidebar__scrollwrap {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 移动端导航优化 - 增大可点击区域 */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__item {
+    padding: 0.2rem 0;
+  }
+
+  .md-nav__link {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+/* ========== 首页美化样式 ========== */
+
+/* Hero Banner 英雄横幅 */
+.hero-banner {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+
+  /* 背景层叠：图片（如果有）→ 遮罩 → 渐变备用 */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(30, 58, 138, 0.85) 0%,    /* 深蓝色遮罩 */
+      rgba(67, 56, 202, 0.85) 50%,   /* 靛蓝色遮罩 */
+      rgba(109, 40, 217, 0.85) 100%  /* 紫色遮罩 */
+    ),
+    linear-gradient(135deg, #1e3a8a 0%, #4338ca 50%, #6d28d9 100%);
+
+  /* 如果图片存在，将显示图片 */
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(30, 58, 138, 0.75) 0%,
+      rgba(67, 56, 202, 0.75) 50%,
+      rgba(109, 40, 217, 0.75) 100%
+    ),
+    url('/assets/images/hero-bg.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;  /* 视差效果 */
+}
+
+/* 如果使用PNG图片 */
+.hero-banner.hero-bg-png {
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(30, 58, 138, 0.75) 0%,
+      rgba(67, 56, 202, 0.75) 50%,
+      rgba(109, 40, 217, 0.75) 100%
+    ),
+    url('/assets/images/hero-bg.png');
+}
+
+.hero-banner h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;  /* 改为白色，在深色背景上清晰 */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);  /* 添加阴影增强可读性 */
+  z-index: 1;
+  position: relative;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.95);  /* 白色半透明 */
+  margin: 0;
+  line-height: 1.6;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  position: relative;
+  max-width: 600px;
+}
+
+/* 移动端 Hero 优化 */
+@media screen and (max-width: 76.1875em) {
+  .hero-banner {
+    padding: 3rem 1rem 2rem;
+    min-height: 50vh;
+    background-attachment: scroll;  /* 移动端禁用视差效果 */
+  }
+
+  .hero-banner h1 {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* 超小屏幕 Hero 优化 */
+@media screen and (max-width: 480px) {
+  .hero-banner {
+    padding: 2.5rem 1rem 1.5rem;
+    min-height: 45vh;
+  }
+
+  .hero-banner h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* 卡片网格布局 */
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.grid.cards > * {
+  background: var(--md-code-bg-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.grid.cards > *:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--md-accent-fg-color);
+}
+
+/* 移动端卡片优化 */
+@media screen and (max-width: 76.1875em) {
+  .grid.cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .grid.cards > * {
+    padding: 1.2rem;
+  }
+}
+
+/* Timeline 时间线样式 */
+.timeline {
+  margin: 1rem 0;
+  padding-left: 1rem;
+}
+
+.timeline ul,
+.timeline > * {
+  list-style: none;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.timeline li {
+  position: relative;
+  padding: 0.5rem 0;
+  padding-left: 2rem;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--md-accent-fg-color);
+  border: 2px solid var(--md-default-bg-color);
+  z-index: 1;
+}
+
+.timeline li::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1.3rem;
+  bottom: -0.5rem;
+  width: 2px;
+  background: var(--md-default-fg-color--lightest);
+}
+
+.timeline li:last-child::after {
+  display: none;
+}
+
+/* Footer Info 样式 */
+.footer-info {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.footer-info .md-button {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+/* 标签页样式优化 */
+.tabbed-set {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabbed-labels {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* 移动端标签页优化 */
+@media screen and (max-width: 76.1875em) {
+  .tabbed-labels > label {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+/* 深色模式优化 */
+[data-md-color-scheme="slate"] .hero-banner {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.1) 0%, 
+    rgba(139, 92, 246, 0.1) 100%);
+}
+
+[data-md-color-scheme="slate"] .grid.cards > * {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .grid.cards > *:hover {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* 图标颜色优化 */
+.md-typeset .grid.cards svg {
+  color: var(--md-accent-fg-color);
+}
+
+/* 按钮样式增强 */
+.md-button {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.md-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.md-button--primary {
+  background: linear-gradient(120deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.md-button--primary:hover {
+  background: linear-gradient(120deg, #4f46e5 0%, #7c3aed 100%);
+}
